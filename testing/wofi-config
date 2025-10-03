@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#### this is a menu for wofi that allows me to select from which config I want to open
+
+# set styling for wofi menu
+Dir=$(dirname "$0")
+echo "$Dir"
+Style="$Dir/../style/style.css"
+Colors="$Dir/../style/colors"
+
+#Set variables for the location of where I want to open the config from.
+Hyprland=~/.config/hypr/hyprland.conf
+Waybar=~/.config/waybar
+
+main() {
+    configOption=$(printf "Hyprland\nWaybar\n" | wofi -d --style $Style --color $Colors)
+    case "$configOption" in
+    Hyprland)
+        kitty nvim $Hyprland
+        ;;
+    Waybar)
+        kitty nvim $Waybar
+        ;;
+    esac
+}
+
+main

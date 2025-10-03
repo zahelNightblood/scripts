@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DIR=$(dirname "$0")
+
+CONFIG="$DIR/../style/config.ini"
+STYLE="$DIR/../style/style.css"
+COLORS="$DIR/../style/colors"
+
+if [[ ! $(pidof wofi) ]]; then
+    wofi --show drun --prompt 'Search...' --conf ${CONFIG} --style ${STYLE} --color ${COLORS}
+else
+    pkill wofi
+fi
