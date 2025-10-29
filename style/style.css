@@ -5,9 +5,9 @@
 }
 
 #window {
-	background: rgba(47,55,65,.9);
+	background: rgba(08,08,11,.9);
 	color: --wofi-color2;
-	border: 2px solid rgb(122,162,247);
+	border: 2px solid rgba(194, 25, 25, 1);
 	border-radius: 0px;
 }
 
