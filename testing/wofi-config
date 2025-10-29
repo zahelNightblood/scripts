@@ -7,6 +7,7 @@ Dir=$(dirname "$0")
 echo "$Dir"
 Style="$Dir/../style/style.css"
 Colors="$Dir/../style/colors"
+Config="$Dir/../style/config.ini"
 
 #Set variables for the location of where I want to open the config from.
 Hyprland=~/.config/hypr/hyprland.conf
@@ -14,18 +15,18 @@ Waybar=~/.config/waybar
 Nvim=~/.config/nvim
 
 main() {
-    configOption=$(printf "Hyprland\nWaybar\nNvim" | wofi -d --style $Style --color $Colors)
-    case "$configOption" in
-    Hyprland)
-        kitty nvim $Hyprland
-        ;;
-    Waybar)
-        kitty nvim $Waybar
-        ;;
-    Nvim)
-        kitty nvim $Nvim
-        ;;
-    esac
+   configOption=$(printf "Hyprland\nWaybar\nNvim" | wofi -d --style $Style --color $Colors --conf $Config)
+   case "$configOption" in
+   Hyprland)
+      kitty nvim $Hyprland
+      ;;
+   Waybar)
+      kitty nvim $Waybar
+      ;;
+   Nvim)
+      kitty nvim $Nvim
+      ;;
+   esac
 }
 
 main

@@ -2,12 +2,12 @@
 
 DIR=$(dirname "$0")
 
-CONFIG="$DIR/../style/config.ini"
+CONFIG="$DIR/../style/appmenu.ini"
 STYLE="$DIR/../style/style.css"
 COLORS="$DIR/../style/colors"
 
 if [[ ! $(pidof wofi) ]]; then
-    wofi --show drun --prompt 'Search...' --conf ${CONFIG} --style ${STYLE} --color ${COLORS}
+   wofi --show drun --prompt 'Search...' --conf ${CONFIG} --style ${STYLE} --color ${COLORS}
 else
-    pkill wofi
+   pkill wofi
 fi

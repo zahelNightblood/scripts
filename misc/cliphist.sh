@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+Dir=$(dirname "$0")
+echo "$Dir"
+Style="$Dir/../style/style.css"
+Colors="$Dir/../style/colors"
+Config="$Dir/../style/config.ini"
 # executes same behaviour as below but with support for images
 #
 # cliphist list | wofi --dmenu | cliphist decode
@@ -15,12 +20,12 @@ cliphist_list="$(cliphist list)"
 
 # delete thumbnails in cache but not in cliphist
 for thumb in "$thumb_dir"/*; do
-    clip_id="${thumb##*/}"
-    clip_id="${clip_id%.*}"
-    check=$(rg <<<"$cliphist_list" "^$clip_id\s")
-    if [ -z "$check" ]; then
-        >&2 rm -v "$thumb"
-    fi
+   clip_id="${thumb##*/}"
+   clip_id="${clip_id%.*}"
+   check=$(rg <<<"$cliphist_list" "^$clip_id\s")
+   if [ -z "$check" ]; then
+      >&2 rm -v "$thumb"
+   fi
 done
 
 # remove unnecessary image tags
@@ -37,17 +42,17 @@ read -r -d '' prog <<EOF
     1
 EOF
 
-choice=$(gawk <<<$cliphist_list "$prog" | wofi -I --dmenu --cache-file=/dev/null -Dimage_size=100 -Dynamic_lines=true)
+choice=$(gawk <<<$cliphist_list "$prog" | wofi -I --dmenu --cache-file=/dev/null --style $Style --color $Colors --conf $Config)
 
 # stop execution if nothing selected in wofi menu
 [ -z "$choice" ] && exit 1
 
 if [ "${choice::4}" = "img:" ]; then
-    thumb_file="${choice:4}"
-    clip_id="${thumb_file##*/}"
-    clip_id="${clip_id%.*}\t"
+   thumb_file="${choice:4}"
+   clip_id="${thumb_file##*/}"
+   clip_id="${clip_id%.*}\t"
 else
-    clip_id="${choice}"
+   clip_id="${choice}"
 fi
 
 printf "$clip_id" | cliphist decode
