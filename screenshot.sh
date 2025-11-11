@@ -5,9 +5,9 @@
 # set styling for wofi menu
 Dir=$(dirname "$0")
 echo "$Dir"
-Style="$Dir/../style/style.css"
-Colors="$Dir/../style/colors"
-Config="$Dir/../style/config.ini"
+Style="$Dir/style/style.css"
+Colors="$Dir/style/colors"
+Config="$Dir/style/config.ini"
 
 #Set variables for the location of where I want to open the config from.
 Hyprland=~/.config/hypr/hyprland.conf
